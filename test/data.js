@@ -22,6 +22,11 @@ const monkey = {
   writing: Writings.monkey,
 };
 
-animalData.push(dog, cat, pig, monkey);
+const dog2 = {
+  type: 'dog',
+  writing: Writings.monkey,
+};
+
+animalData.push(dog, cat, pig, monkey, dog2);
 
 module.exports = animalData;

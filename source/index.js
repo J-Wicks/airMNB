@@ -1,3 +1,4 @@
 const data = require('../test/data');
+const utils = require('./utils');
 
-console.log(data);
+console.log(utils.countToken(data, 'dog'));
