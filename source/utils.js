@@ -27,20 +27,24 @@ utilFunctions.tokenize = function (vocab) {
     const newWord = word.replace(/[^a-zA-Z ]/g, '');
     countsObj[newWord] = 0;
   });
+  delete countsObj[''];
   return countsObj;
 };
 
-utilFunctions.countToken = function (dataset, token) {
+utilFunctions.tokenCounts = function (dataset) {
   const countsObj = {};
-  const newDataSet = utilFunctions.collectTexts(dataset, token).split(' ');
-  newDataSet.forEach((word) => {
+  const newData = dataset.split(' ');
+  console.log(newData);
+  // const newDataSet = utilFunctions.collectTexts(dataset, token).split(' ');
+  newData.forEach((word) => {
     const newWord = word.replace(/[^a-zA-Z ]/g, '');
     if (!countsObj[newWord]) {
       countsObj[newWord] = 1;
     } else countsObj[newWord] += 1;
   });
+
   delete countsObj[''];
-  return [countsObj[token], countsObj];
+  return countsObj;
 };
 
 utilFunctions.gatherClasses = function (dataset) {
