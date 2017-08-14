@@ -2,31 +2,22 @@ const Writings = require('./writings');
 
 const animalData = [];
 
-const dog = {
-  type: 'dog',
-  writing: Writings.dog,
+const pynchon = {
+  type: 'pynchon',
+  writing: Writings.pynchon,
 };
 
-const cat = {
-  type: 'cat',
-  writing: Writings.cat,
+const dillard = {
+  type: 'dillard',
+  writing: Writings.dillard,
 };
 
-const pig = {
-  type: 'pig',
-  writing: Writings.pig,
+const camus = {
+  type: 'camus',
+  writing: Writings.camus,
 };
 
-const monkey = {
-  type: 'monkey',
-  writing: Writings.monkey,
-};
 
-const dog2 = {
-  type: 'dog',
-  writing: Writings.monkey,
-};
-
-animalData.push(dog, cat, pig, monkey, dog2);
+animalData.push(pynchon, dillard, camus);
 
 module.exports = animalData;

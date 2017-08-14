@@ -15,7 +15,11 @@ utilFunctions.countDocs = function (dataset, specClass) {
 };
 
 utilFunctions.collectTexts = function (dataset, specClass) {
-  let newDataSet = dataset.filter(dataObj => dataObj.type === specClass);
+  let newDataSet = dataset;
+  if(specClass){
+    newDataSet = dataset.filter(dataObj => dataObj.type === specClass);
+  }
+
   newDataSet = newDataSet.map(dataObj => dataObj.writing).join(' ');
   return newDataSet;
 };
