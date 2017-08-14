@@ -4,27 +4,31 @@ const utils = require('./utils');
 // Data = array of objects {class, writing}
 // console.log(utils.gatherClasses(data));
 
-const C = utils.gatherClasses(data)
+const C = utils.gatherClasses(data);
 
-const trainMultiDB = (classes, dataset) =>{
+const trainMultiDB = (classes, dataset) => {
+  const conditionalProbabilities = {};
   const prior = {};
-  const V = utils.tokenize(utils.extractVocab(dataset).join(' '));
+  const vocab = Object.keys(utils.tokenize(utils.extractVocab(dataset).join(' ')));
   const N = utils.countDocs(dataset);
 
   // console.log(V)
 
-  classes.forEach(_class =>{
-    const classDocsN = utils.countDocs(dataset,_class);
-    const textsOfClass = utils.collectTexts(dataset, _class);
+  classes.forEach((currClass) => {
+    // console.log(currClass)
+    const classDocsN = utils.countDocs(dataset, currClass);
+    const textsOfClass = utils.collectTexts(dataset, currClass);
     // this should be an object with all of the tokens in this text and their counts;
-    const tokensCountsOfClass = utils.tokenCounts(textsOfClass)
+    const tokensCountsOfClass = utils.tokenCounts(textsOfClass);
+    prior[currClass] = classDocsN / N;
 
-    prior[_class] = classDocsN/N;
+    vocab.forEach((word) => {
+      conditionalProbabilities[word] = conditionalProbabilities[word] || [];
+      conditionalProbabilities[word].push({class: currClass, probability: 0});
+    });
 
-    console.log(tokensCountsOfClass)
-  })
+  });
+  // console.log(conditionalProbabilities.the);
+};
 
-}
-
-
-trainMultiDB(C, data)
+trainMultiDB(C, data);

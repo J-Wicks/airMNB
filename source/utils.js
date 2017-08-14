@@ -34,7 +34,6 @@ utilFunctions.tokenize = function (vocab) {
 utilFunctions.tokenCounts = function (dataset) {
   const countsObj = {};
   const newData = dataset.split(' ');
-  console.log(newData);
   // const newDataSet = utilFunctions.collectTexts(dataset, token).split(' ');
   newData.forEach((word) => {
     const newWord = word.replace(/[^a-zA-Z ]/g, '');
