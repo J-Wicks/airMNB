@@ -20,4 +20,19 @@ function fit (iterableSamples, options) {
   return countsObj;
 }
 
-console.log(fit(data));
+function transform (iterableSamples, options) {
+  const fitted = fit(iterableSamples);
+  const tokens = Object.keys(fitted);
+  const classes = Object.keys(iterableSamples);
+  const transformed = [];
+  tokens.forEach((token) => {
+    const countsByClass = [];
+    classes.forEach((_class) => {
+      countsByClass.push(fitted[token][_class] || 0);
+    });
+    transformed.push(countsByClass);
+  });
+  return transformed;
+}
+
+console.log(transform(data));
