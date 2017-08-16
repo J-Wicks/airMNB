@@ -17,22 +17,22 @@ function fit (iterableSamples, options) {
   });
 
   delete countsObj[''];
-  return countsObj;
+  return {fittedModel: countsObj, classes: iterableArray};
 }
 
-function transform (iterableSamples, options) {
-  const fitted = fit(iterableSamples);
-  const tokens = Object.keys(fitted);
-  const classes = Object.keys(iterableSamples);
+function transform (fitted, options) {
+  const tokens = Object.keys(fitted.fittedModel);
+  const classes = fitted.classes;
+
   const transformed = [];
   tokens.forEach((token) => {
     const countsByClass = [];
     classes.forEach((_class) => {
-      countsByClass.push(fitted[token][_class] || 0);
+      countsByClass.push(fitted.fittedModel[token][_class] || 0);
     });
     transformed.push(countsByClass);
   });
   return transformed;
 }
 
-console.log(transform(data));
+console.log(transform(fit(data)));
