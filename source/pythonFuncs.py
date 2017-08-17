@@ -5,4 +5,4 @@ import sys
 from sklearn.feature_extraction.text import CountVectorizer;
 import pythonSource;
 
-print(CountVectorizer().transform(pythonSource.writings))
+print(CountVectorizer().get_feature_names(pythonSource.writings))
