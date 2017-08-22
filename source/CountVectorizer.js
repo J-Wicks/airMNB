@@ -1,8 +1,10 @@
+
 const data = require('../test/countVectorizerData');
 
 const CountVectorizer = () => {
 
   const fitter = () => ({
+    // I think this needs to return an array, in order to maintain order
     fit: (iterableSamples, options) => {
       const masterArray = Object.keys(iterableSamples);
       let iterableArray = masterArray.filter(word => word.length >= 2 && word !== '');
@@ -28,12 +30,12 @@ const CountVectorizer = () => {
   const transformer = () => ({
     transform: (fitted, options) => {
       const tokens = Object.keys(fitted.fittedModel);
-      const classes = fitted.classes;
+      const currClasses = fitted.classes;
 
       const transformed = [];
       tokens.forEach((token) => {
         const countsByClass = [];
-        classes.forEach((_class) => {
+        currClasses.forEach((_class) => {
           countsByClass.push(fitted.fittedModel[token][_class] || 0);
         });
         transformed.push(countsByClass);
