@@ -4,12 +4,14 @@ const CountVectorizer = () => {
 
   const fitter = () => ({
     fit: (iterableSamples, options) => {
-      const iterableArray = Object.keys(iterableSamples);
+      const masterArray = Object.keys(iterableSamples);
+      let iterableArray = masterArray.filter(word => word.length >= 2 && word !== '');
+      iterableArray = iterableArray.map(word => word.toLowerCase());
       const countsObj = {};
       iterableArray.forEach((classifier) => {
         const newVocab = iterableSamples[classifier].split(' ');
         newVocab.forEach((word) => {
-          const newWord = word.replace(/[^a-zA-Z ]/g, '');
+          const newWord = word.replace(/[^a-zA-Z ]/g, '').toLowerCase();
           if(!countsObj[newWord]){
             countsObj[newWord] = {};
             countsObj[newWord][classifier] = 1;
@@ -44,4 +46,4 @@ const CountVectorizer = () => {
 };
 
 const fittedData = CountVectorizer().fit(data);
-console.log(CountVectorizer().transform(fittedData));
+console.log(fittedData);

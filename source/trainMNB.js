@@ -1,6 +1,8 @@
 const utils = require('./utils');
 const _ = require('lodash');
 
+// should return a function "Fit"
+// "Fit"
 const trainMNB = (classes, dataset) => {
   const conditionalProbabilities = {};
   const prior = {};
