@@ -1,10 +1,13 @@
 
 const data = require('../test/countVectorizerData');
 
+// should countVectorizer take an optional argument data, so that all functions use this data if it was provided?
+
 const CountVectorizer = () => {
 
   const fitter = () => ({
     // I think this needs to return an array, in order to maintain order
+    // This will allow us to capture order to compare to our data sample y axis
     fit: (iterableSamples, options) => {
       const masterArray = Object.keys(iterableSamples);
       let iterableArray = masterArray.filter(word => word.length >= 2 && word !== '');
@@ -22,6 +25,9 @@ const CountVectorizer = () => {
       });
 
       delete countsObj[''];
+      // figure out how to pull all classes from countsObj, get rid of classes
+      // also this probably isn't what fit is supposed to do
+      //so this should probably be part of transformer
       return {fittedModel: countsObj, classes: iterableArray};
     },
 
@@ -40,12 +46,12 @@ const CountVectorizer = () => {
         });
         transformed.push(countsByClass);
       });
-      return transformed;
+      return {data: transformed, labels: tokens};
     },
   });
 
   return Object.assign({}, fitter(), transformer());
 };
 
-const fittedData = CountVectorizer().fit(data);
+const fittedData = CountVectorizer().transform(CountVectorizer().fit(data)).labels;
 console.log(fittedData);
