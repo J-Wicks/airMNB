@@ -6,8 +6,6 @@ const data = require('../test/countVectorizerData');
 const CountVectorizer = () => {
 
   const fitter = () => ({
-    // I think this needs to return an array, in order to maintain order
-    // This will allow us to capture order to compare to our data sample y axis
     fit: (iterableSamples, options) => {
       const masterArray = Object.keys(iterableSamples);
       let iterableArray = masterArray.filter(word => word.length >= 2 && word !== '');
@@ -53,5 +51,7 @@ const CountVectorizer = () => {
   return Object.assign({}, fitter(), transformer());
 };
 
-const fittedData = CountVectorizer().transform(CountVectorizer().fit(data)).labels;
-console.log(fittedData);
+// const fittedData = CountVectorizer().transform(CountVectorizer().fit(data)).labels;
+// console.log(fittedData);
+
+module.exports = CountVectorizer;
