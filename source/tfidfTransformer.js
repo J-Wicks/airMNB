@@ -25,7 +25,8 @@ as idf(d, t) = log [ n / (df(d, t) + 1) ]).
 const fitTransform = termDocMatrix => {
   const numDocs = termDocMatrix[0].length;
   const tfIdfMatrix = termDocMatrix.map(array => {
-    return array.map(value => Math.log(numDocs /* / WHAT SHOULD THIS BE */) + 1);
+    const arraySum = array.reduce((a, b) => a + b);
+    return array.map(value => value * (Math.log(numDocs / arraySum)));
   });
   return tfIdfMatrix;
 };
