@@ -16,3 +16,18 @@ i.e., terms that occur in all documents in a training set, will not be entirely 
 (Note that the idf formula above differs from the standard textbook notation that defines the idf 
 as idf(d, t) = log [ n / (df(d, t) + 1) ]).
 */
+
+// n = length of first array
+
+//tfidf fit_transform should take a transformed (countvectorizer.transform()) matrix
+// should return a matrix with a bunch of logarithmic values
+
+const fitTransform = termDocMatrix => {
+  const numDocs = termDocMatrix[0].length;
+  const tfIdfMatrix = termDocMatrix.map(array => {
+    return array.map(value => Math.log(numDocs /* / WHAT SHOULD THIS BE */) + 1);
+  });
+  return tfIdfMatrix;
+};
+
+module.exports = fitTransform;

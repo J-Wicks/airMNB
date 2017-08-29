@@ -7,6 +7,7 @@ from sklearn.feature_extraction.text import TfidfTransformer
 import pythonSource;
 
 genderVectorizer = CountVectorizer()
+tfidf = TfidfTransformer()
 
 url = 'http://localhost:8080/api/allData'
 dataset = pd.read_json(url)
@@ -17,10 +18,11 @@ genderData['gender'] = genderData['gender'].replace(man, 'Man')
 genderData['gender'] = genderData['gender'].replace(woman, 'Woman')
 gdf = genderData.drop(['orientation', 'race'], 1)
 # dataset is a matrix like thing of class info and writing sample
-print (genderVectorizer.fit(gdf.writing))
+# print (genderVectorizer.fit(gdf.writing))
 
-#XGender = tfidf.fit_transform(genderVectorizer.fit_transform(gdf.writing))
+XGender = tfidf.fit_transform(genderVectorizer.fit_transform(gdf.writing))
 
+print (XGender)
 # gdf['gender'] represents the class name, in order
 # this is passed to the MultiNomialNB().fit learner as the 2nd argument (y-axis)
 # the x-axis is the tfidf fit of the countvectorizer fit_transform of the samples
