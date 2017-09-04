@@ -25,6 +25,7 @@ utilFunctions.collectTexts = function (dataset, specClass) {
 };
 
 utilFunctions.tokenize = function (vocab) {
+  console.log(vocab)
   const countsObj = {};
   const newVocab = vocab.split(' ');
   newVocab.forEach((word) => {
