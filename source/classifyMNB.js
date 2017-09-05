@@ -37,5 +37,6 @@ const fitTransformed = CountVectorizer().transform(fittedData);
 
 // console.log(tfidfFitTransform(fitTransformed.data));
 // console.log(fitTransformed);
-console.log(classifyMNB(tfidfFitTransform(fitTransformed.data), fitTransformed.labels)('money make me cum'));
+console.log(classifyMNB(tfidfFitTransform(fitTransformed.data), fitTransformed.labels)('money make me dance'));
 // console.log(trainMNB(C, data));
+// console.log(utils.getTokenCounts(fitTransformed.data));

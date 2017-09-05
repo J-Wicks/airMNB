@@ -56,4 +56,14 @@ utilFunctions.gatherClasses = function (dataset) {
   return uniqueClasses.map(entry => entry.type);
 };
 
+utilFunctions.getTokenCounts = function(model) {
+  const tokenScores = [0, 0, 0];
+  for (let i = 0; i < model[0].length; i += 1) {
+    model.forEach((token) => {
+      tokenScores[i] += token[i];
+    });
+  }
+  return tokenScores;
+};
+
 module.exports = utilFunctions;

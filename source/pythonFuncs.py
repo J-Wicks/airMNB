@@ -19,10 +19,10 @@ genderData['gender'] = genderData['gender'].replace(woman, 'Woman')
 gdf = genderData.drop(['orientation', 'race'], 1)
 # dataset is a matrix like thing of class info and writing sample
 # print (genderVectorizer.fit(gdf.writing))
+# print(gdf.writing)
 
-XGender = tfidf.fit_transform(genderVectorizer.fit_transform(gdf.writing))
-
-print (XGender)
+XGender = tfidf.fit_transform(genderVectorizer.fit_transform([2, 3]))
+print(XGender)
 # gdf['gender'] represents the class name, in order
 # this is passed to the MultiNomialNB().fit learner as the 2nd argument (y-axis)
 # the x-axis is the tfidf fit of the countvectorizer fit_transform of the samples
