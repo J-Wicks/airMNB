@@ -44,6 +44,7 @@ const _ = require('lodash');
 // trainMultiDB(C, data);
 const fit = (model, words) => {
   const classifier = (doc) => {
+    doc = doc.toLowerCase();
     const docTokens = Object.keys(utils.tokenize(doc));
     const docVocab = _.intersection(docTokens, words);
     const probabilities = Array(model[0].length).fill(0);

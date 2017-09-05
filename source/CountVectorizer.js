@@ -51,7 +51,6 @@ const CountVectorizer = () => {
   return Object.assign({}, fitter(), transformer());
 };
 
-// const fittedData = CountVectorizer().transform(CountVectorizer().fit(data)).labels;
-// console.log(fittedData);
+
 
 module.exports = CountVectorizer;

@@ -9,34 +9,29 @@ const tfidfFitTransform = require('./tfidfTransformer');
 
 const fittedData = (CountVectorizer().fit(data));
 
-// what should this return
-//   "learn a vocabulary dictionary of all tokens in the raw documents"
-//   that sounds like what it's doing...
 
-// what does this return:
+// fittedData
 // object with properties (tokens) and the counts of these tokens in each sample {className: count}
 // also returns classes
 // // fine for now
 // console.log(fittedData);
 
-// // // what should this return?
-// // // term-document matrix (Does this, see below)
 
-// // // what does it return now?
-// // // returns a matrix (2D array) of tokens
-// // // also returns in-order labels
-// // // console.log(CountVectorizer().fit_transform(data));
+//CountVectorizer().fit_transform(data) -- Not yet defined
+// // // returns a term-document matrix
 // console.log(CountVectorizer().transform(fittedData).data);
 
-// // // what should this be?
-// // // List of tokens, in same order as fit_transform
-// // // what does it return?
-// // // exactly that.
-// console.log(CountVectorizer().transform(fittedData).labels);
+// fittedData.labels = inorder list of tokens to be used as Y axis for classifyMNB
+// fittedData.data = document matrix
+
 const fitTransformed = CountVectorizer().transform(fittedData);
+// transform takes a fitted data model and turns it into a matrix of token counts as .data
+// also returns an array of token names in the same order as the matrix as .labels
 
 // console.log(tfidfFitTransform(fitTransformed.data));
 // console.log(fitTransformed);
-console.log(classifyMNB(tfidfFitTransform(fitTransformed.data), fitTransformed.labels)('microbe mistake died'));
-// console.log(trainMNB(C, data));
-// console.log(utils.getTokenCounts(fitTransformed.data));
+console.log(classifyMNB(tfidfFitTransform(fitTransformed.data), fitTransformed.labels)('Microbe Mistake Died'));
+
+//tfidfFitTransform returns a matrix of term frequency inverse document frequency weights
+// in same order as cv().transform
+
