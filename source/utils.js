@@ -1,12 +1,12 @@
 const utilFunctions = {};
 const _ = require('lodash');
 
-utilFunctions.extractVocab = function (dataset) {
+utilFunctions.extractVocab = (dataset) => {
   const newDataset = dataset.map(dataObj => dataObj.writing);
   return newDataset;
 };
 
-utilFunctions.countDocs = function (dataset, specClass) {
+utilFunctions.countDocs = (dataset, specClass) => {
   let newDataSet = dataset;
   if (specClass) {
     newDataSet = dataset.filter(dataObj => dataObj.type === specClass);
@@ -14,9 +14,9 @@ utilFunctions.countDocs = function (dataset, specClass) {
   return newDataSet.length;
 };
 
-utilFunctions.collectTexts = function (dataset, specClass) {
+utilFunctions.collectTexts = (dataset, specClass) => {
   let newDataSet = dataset;
-  if(specClass){
+  if (specClass) {
     newDataSet = dataset.filter(dataObj => dataObj.type === specClass);
   }
 
@@ -24,8 +24,7 @@ utilFunctions.collectTexts = function (dataset, specClass) {
   return newDataSet;
 };
 
-utilFunctions.tokenize = function (vocab) {
-  console.log(vocab)
+utilFunctions.tokenize = (vocab) => {
   const countsObj = {};
   const newVocab = vocab.split(' ');
   newVocab.forEach((word) => {
@@ -36,7 +35,7 @@ utilFunctions.tokenize = function (vocab) {
   return countsObj;
 };
 
-utilFunctions.tokenCounts = function (dataset) {
+utilFunctions.tokenCounts = (dataset) => {
   const countsObj = {};
   const newData = dataset.split(' ');
   // const newDataSet = utilFunctions.collectTexts(dataset, token).split(' ');
@@ -51,12 +50,12 @@ utilFunctions.tokenCounts = function (dataset) {
   return countsObj;
 };
 
-utilFunctions.gatherClasses = function (dataset) {
+utilFunctions.gatherClasses = (dataset) => {
   const uniqueClasses = _.uniqBy(dataset, object => object.type);
   return uniqueClasses.map(entry => entry.type);
 };
 
-utilFunctions.getTokenCounts = function(model) {
+utilFunctions.getTokenCounts = (model) => {
   const tokenScores = [0, 0, 0];
   for (let i = 0; i < model[0].length; i += 1) {
     model.forEach((token) => {

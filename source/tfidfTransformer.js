@@ -19,7 +19,7 @@ as idf(d, t) = log [ n / (df(d, t) + 1) ]).
 
 // n = length of first array
 
-//tfidf fit_transform should take a transformed (countvectorizer.transform()) matrix
+// tfidf fit_transform should take a transformed (countvectorizer.transform()) matrix
 // should return a matrix with a bunch of logarithmic values
 
 const fitTransform = (termDocMatrix) => {
