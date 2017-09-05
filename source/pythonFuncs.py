@@ -11,20 +11,40 @@ tfidf = TfidfTransformer()
 
 url = 'http://localhost:8080/api/allData'
 dataset = pd.read_json(url)
-genderData = dataset[dataset.gender != 'unspecified']
+### GENDER
+
+# Buckets are 'Man', 'Woman', 'Other'
+
+genderVectorizer = CountVectorizer()
+
+# Set variables to bucket alike-categories
 man = ['Cis_Man']
 woman = ['Cis_Woman']
+
+# Regex for everything not caught by the defined buckets
+regex = '^((?!(^Man$|^Woman$|^Other$)).).+$'
+
+# Removes 'unspecified' since they are unknowable features
+# and buckets all others into 'Man', 'Woman', and 'Other'
+# for model fitting
+genderData = dataset[dataset.gender != 'unspecified']
 genderData['gender'] = genderData['gender'].replace(man, 'Man')
 genderData['gender'] = genderData['gender'].replace(woman, 'Woman')
+genderData['gender'] = genderData['gender'].replace(
+    to_replace=regex,
+    value='Other',
+    regex=True
+)
 gdf = genderData.drop(['orientation', 'race'], 1)
-# dataset is a matrix like thing of class info and writing sample
-# print (genderVectorizer.fit(gdf.writing))
-# print(gdf.writing)
+# Set variables to train the genderModel and predict
+XGender = tfidf.fit_transform(genderVectorizer.fit_transform(gdf.writing))
+yGender = gdf.gender
+print(XGender, yGender)
+genderTest = tfidf.transform(genderVectorizer.transform(['im a big baby']))
 
-XGender = tfidf.fit_transform(genderVectorizer.fit_transform([2, 3]))
-print(XGender)
-# gdf['gender'] represents the class name, in order
-# this is passed to the MultiNomialNB().fit learner as the 2nd argument (y-axis)
-# the x-axis is the tfidf fit of the countvectorizer fit_transform of the samples
-# these apparently must be in the same order as the y-axis argument
-# print(gdf['gender'])
+# Train the genderModel and predict the submitted string
+from sklearn.naive_bayes import MultinomialNB
+
+genderModel = MultinomialNB().fit(XGender, yGender)
+genderPrediction = genderModel.predict(genderTest)
+genderProbs = genderModel.predict_proba(genderTest)

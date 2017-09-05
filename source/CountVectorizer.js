@@ -1,6 +1,20 @@
-const CountVectorizer = () => {
+// Options to add
+// strip_accents
+// analyzer (word, char(ngrams))
+// stop_words (take array of words to ignore)
+// lowercase
+// max_df
+// min_df
+// binary (set all non-zer counts to one)
+
+// Methods to add
+// get_feature_names
+// get_stop_words
+// fit_transform
+
+const CountVectorizer = (options) => {
   const fitter = () => ({
-    fit: (iterableSamples, options) => {
+    fit: (iterableSamples) => {
       const masterArray = Object.keys(iterableSamples);
       let iterableArray = masterArray.filter(word => word.length >= 2 && word !== '');
       iterableArray = iterableArray.map(word => word.toLowerCase());
@@ -19,7 +33,6 @@ const CountVectorizer = () => {
           }
         });
       });
-
       delete countsObj[''];
       return {fittedModel: countsObj, classes: iterableArray};
     },
@@ -27,7 +40,7 @@ const CountVectorizer = () => {
   });
 
   const transformer = () => ({
-    transform: (fitted, options) => {
+    transform: (fitted) => {
       const tokens = Object.keys(fitted.fittedModel);
       const currClasses = fitted.classes;
 
@@ -39,7 +52,7 @@ const CountVectorizer = () => {
         });
         transformed.push(countsByClass);
       });
-      return {data: transformed, labels: tokens};
+      return {data: transformed, labels: tokens, classes: fitted.classes};
     },
   });
 

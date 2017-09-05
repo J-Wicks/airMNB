@@ -23,12 +23,12 @@ as idf(d, t) = log [ n / (df(d, t) + 1) ]).
 // should return a matrix with a bunch of logarithmic values
 
 const fitTransform = (termDocMatrix) => {
-  const numDocs = termDocMatrix[0].length;
-  const tfIdfMatrix = termDocMatrix.map((array) => {
+  const numDocs = termDocMatrix.data[0].length;
+  const tfIdfMatrix = termDocMatrix.data.map((array) => {
     const docsWithTerm = array.filter(val => val).length;
     return array.map(value => value * (Math.log(numDocs / docsWithTerm)));
   });
-  return tfIdfMatrix;
+  return Object.assign({}, {data: tfIdfMatrix}, {classes: termDocMatrix.classes, labels: termDocMatrix.labels});
 };
 
 module.exports = fitTransform;

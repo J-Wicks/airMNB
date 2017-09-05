@@ -27,7 +27,10 @@ const fitTransformed = CountVectorizer().transform(fittedData);
 
 // console.log(tfidfFitTransform(fitTransformed.data));
 // console.log(fitTransformed);
-console.log(classifyMNB(tfidfFitTransform(fitTransformed.data), fitTransformed.labels)('Microbe Mistake Died'));
+const tfidfTransformed = tfidfFitTransform(fitTransformed);
+const labels = fitTransformed.labels;
+
+console.log(classifyMNB().fit(tfidfTransformed, labels).predict('does this work'));
 
 // tfidfFitTransform returns a matrix of term frequency inverse document frequency weights
 // in same order as cv().transform
