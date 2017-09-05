@@ -22,11 +22,11 @@ as idf(d, t) = log [ n / (df(d, t) + 1) ]).
 //tfidf fit_transform should take a transformed (countvectorizer.transform()) matrix
 // should return a matrix with a bunch of logarithmic values
 
-const fitTransform = termDocMatrix => {
+const fitTransform = (termDocMatrix) => {
   const numDocs = termDocMatrix[0].length;
-  const tfIdfMatrix = termDocMatrix.map(array => {
-    const arraySum = array.reduce((a, b) => a + b);
-    return array.map(value => value * (Math.log(numDocs / arraySum)));
+  const tfIdfMatrix = termDocMatrix.map((array) => {
+    const docsWithTerm = array.filter(val => val).length;
+    return array.map(value => value * (Math.log(numDocs / docsWithTerm)));
   });
   return tfIdfMatrix;
 };
