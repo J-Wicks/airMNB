@@ -12,7 +12,7 @@
 // get_stop_words
 // fit_transform
 
-const CountVectorizer = (options) => {
+const CountVectorizer = () => {
   const fitter = () => ({
     fit: (iterableSamples) => {
       const masterArray = Object.keys(iterableSamples);
