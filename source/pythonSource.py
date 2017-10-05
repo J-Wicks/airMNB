@@ -109,11 +109,26 @@ Richard said it was a mistake to create too gloomy a picture, and, moreover, the
 Followed by scowls and protestations, Rieux left the committee room. Some minutes later, as he was driving down a back street redolent of fried fish and urine, a woman screaming in agony, her groin dripping blood, stretched out her arms toward him.""")
 
 
-writings = {
-pynchon,
-dillard,
-camus
-}
+# writings = {"pynchon": pynchon, "dillard": dillard, "camus": camus}
+writings = [
+  {
+    "author": "pynchon",
+    "writing": pynchon
+  },
+  {
+    "author": "camus",
+    "writing": camus
+  },
+    {
+    "author": "dillard",
+    "writing": dillard
+  },
+]
+# writings = {
+# pynchon,
+# dillard,
+# camus
+# }
 
 
 

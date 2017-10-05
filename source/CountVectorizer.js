@@ -1,17 +1,3 @@
-// Options to add
-// strip_accents
-// analyzer (word, char(ngrams))
-// stop_words (take array of words to ignore)
-// lowercase
-// max_df
-// min_df
-// binary (set all non-zer counts to one)
-
-// Methods to add
-// get_feature_names
-// get_stop_words
-// fit_transform
-
 const CountVectorizer = () => {
   const fitter = () => ({
     fit: (iterableSamples) => {
