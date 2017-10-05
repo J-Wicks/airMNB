@@ -3,10 +3,11 @@ import pandas as pd
 import sys
 
 from sklearn.feature_extraction.text import CountVectorizer;
-from sklearn.feature_extraction.text import TfidfTransformer
+from sklearn.feature_extraction.text import TfidfTransformer;
+from sklearn.naive_bayes import MultinomialNB;
 import pythonSource;
 
-genderVectorizer = CountVectorizer()
+authorVectorizer = CountVectorizer()
 tfidf = TfidfTransformer()
 
 
@@ -40,18 +41,17 @@ dataset = pd.DataFrame(data)
 #    regex=True
 #)
 # Set variables to train the genderModel and predict
-XGender = tfidf.fit_transform(genderVectorizer.fit_transform(dataset.writing))
-print(XGender)
-#print(XGender)
-# yGender = gdf.gender
-# print(XGender, yGender)
-# genderTest = tfidf.transform(genderVectorizer.transform(['im a big baby']))
+XAuthor = tfidf.fit_transform(authorVectorizer.fit_transform(dataset.writing))
+yAuthor = dataset.author
+
+authorTest = tfidf.transform(authorVectorizer.transform([sys.argv[1]]))
 
 # Train the genderModel and predict the submitted string
 # from sklearn.naive_bayes import MultinomialNB
 
-# genderModel = MultinomialNB().fit(XGender, yGender)
-# genderPrediction = genderModel.predict(genderTest)
-# genderProbs = genderModel.predict_proba(genderTest)
+authorModel = MultinomialNB().fit(XAuthor, yAuthor)
+authorPrediction = authorModel.predict(authorTest)
+authorProbs = authorModel.predict_proba(authorTest)
 
-# print('is this working')
+print([authorPrediction, authorProbs]);
+

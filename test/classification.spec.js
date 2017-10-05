@@ -15,7 +15,6 @@ Rieux, who had said nothing so far, was asked for his opinion. “We are dealing
 `;
 
 const pythonClassify = (text) => {
-  console.log(text);
   return new Promise((resolve, reject) => {
     const options = {
       pythonPath: '/usr/local/bin/python3',
@@ -25,8 +24,8 @@ const pythonClassify = (text) => {
 
     PythonShell.run('pythonFuncs.py', options, (err, result) => {
       if (err) reject(err);
-      console.log(result[0]);
-      resolve(result[0]);
+      console.log(result);
+      resolve(result);
     });
   });
 };

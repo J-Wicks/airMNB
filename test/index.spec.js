@@ -7,6 +7,8 @@ Two or three of the doctors present protested. The others seemed to hesitate. Th
 
 Rieux, who had said nothing so far, was asked for his opinion. “We are dealing,” he said, “with a fever of typhoidal nature, accompanied by vomiting and buboes. I have incised these buboes and had the pus analyzed; our laboratory analyst believes he has identified the plague bacillus. But I am bound to add that there are specific modifications that don't quite tally with the classical description of the plague bacillus.”
 `;
+
+// const testString = "i'm a big baby"
 // const fittedData = (textClassify.CountVectorizer().fit(data));
 
 const fittedData = textClassify.countVectorizer().fit(data);
@@ -16,6 +18,7 @@ const tfidfTransformed = textClassify.tfidfFitTransform(fitTransformedData);
 const labels = tfidfTransformed.labels;
 const model = textClassify.classifyMNB().fit(tfidfTransformed, labels);
 
+console.log(model.predictProbability(testString))
 // // fittedData
 // // object with properties (tokens) and the counts of these tokens in each sample {className: count}
 // // also returns classes
