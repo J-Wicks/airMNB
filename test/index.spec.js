@@ -18,7 +18,7 @@ const tfidfTransformed = textClassify.tfidfFitTransform(fitTransformedData);
 const labels = tfidfTransformed.labels;
 const model = textClassify.classifyMNB().fit(tfidfTransformed, labels);
 
-console.log(model.predictProbability(testString))
+console.log([model.predict(testString), model.predictProbability(testString)])
 // // fittedData
 // // object with properties (tokens) and the counts of these tokens in each sample {className: count}
 // // also returns classes
